@@ -10,6 +10,7 @@ import TipsSection from './components/TipsSection';
 import ExamplePromptsSection from './components/ExamplePromptsSection';
 import KeyboardShortcutsSection from './components/KeyboardShortcutsSection';
 import { PromptProvider } from './context/PromptContext';
+import { enhanceSvg } from './utils/svgUtils';
 
 export default function Home() {
   const [svg, setSvg] = useState('');
@@ -98,7 +99,8 @@ export default function Home() {
 
   const copySvgCode = () => {
     if (svg) {
-      navigator.clipboard.writeText(svg);
+      // Use the enhanced SVG for copying
+      navigator.clipboard.writeText(enhanceSvg(svg));
 
       // Show a temporary success message
       const el = document.createElement('div');

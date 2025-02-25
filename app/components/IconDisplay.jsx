@@ -1,29 +1,7 @@
 import { motion } from 'framer-motion';
+import { enhanceSvg } from '../utils/svgUtils';
 
 export default function IconDisplay({ svg, isLoading }) {
-    // Simpler function to ensure SVG renders properly
-    const enhanceSvg = (svgString) => {
-        if (!svgString) return '';
-
-        // Add width and height if they don't exist
-        let enhancedSvg = svgString;
-
-        if (!enhancedSvg.includes('width=')) {
-            enhancedSvg = enhancedSvg.replace('<svg', '<svg width="100%"');
-        }
-
-        if (!enhancedSvg.includes('height=')) {
-            enhancedSvg = enhancedSvg.replace('<svg', '<svg height="100%"');
-        }
-
-        // Add preserveAspectRatio if it doesn't exist
-        if (!enhancedSvg.includes('preserveAspectRatio=')) {
-            enhancedSvg = enhancedSvg.replace('<svg', '<svg preserveAspectRatio="xMidYMid meet"');
-        }
-
-        return enhancedSvg;
-    };
-
     return (
         <motion.div
             className="w-full aspect-square max-w-md bg-white rounded-xl shadow-md flex items-center justify-center p-8 border border-gray-200"

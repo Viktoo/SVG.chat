@@ -3,10 +3,12 @@ import Dropdown from './Dropdown';
 
 export default function TipsSection() {
     const tips = [
-        "To change color, specify the color in your prompt (e.g., 'use #53A2EB')",
-        "For complex icons, break down the elements you want to see",
-        "Request specific themes like 'simple', 'rounded', or 'cute'",
-        "Clear between each new icon request",
+        "Clear between new icon requests",
+        "Specify the color in your prompt",
+        "Try adding animations or gradients",
+        "If icon is empty, try again",
+        "Ask to change theme or style",
+        "Ask to remove things you don't like",
     ];
 
     return (

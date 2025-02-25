@@ -7,7 +7,8 @@ export default function ExamplePromptsSection() {
     const { promptInputRef } = useContext(PromptContext);
 
     const examples = [
-        "A house with a door",
+        "An animated sunset",
+        "A #FFDE21 face",
         "A #000000 to #FFFFFF gradient circle",
         "A mountain with sun, blue and orange colors",
         "A cyberpunk-style lock icon with glowing elements"

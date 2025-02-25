@@ -17,12 +17,22 @@ export async function POST(request) {
             Please modify this SVG according to my description. 
             
             - Respond ONLY with valid SVG code self-contained with all styling inline
+            - If animation explicitly requested, use SMIL animation elements (<animate>, <animateTransform>) instead of CSS animations
+            - If gradient explicitly requested, define them with <linearGradient> or <radialGradient> elements
+            - Preserve the existing viewBox, width, and height attributes
+            - Ensure all IDs are unique and properly referenced
             - No explanations or markdown`;
         } else {
             // We're creating a new icon
-            userPrompt = `Create an SVG icon based on this description: "${prompt}". 
-            
+            userPrompt = `Create an SVG icon based on this description: "${prompt}".
+
             - Respond ONLY with valid SVG code self-contained with all styling inline
+            - Include width, height, and viewBox attributes
+            - If animation explicitly requested, use SMIL animation elements (<animate>, <animateTransform>) instead of CSS animations
+            - If gradient explicitly requested, define them with <linearGradient> or <radialGradient> elements
+            - Use inline styles with the style attribute or <style> element within the SVG
+            - Ensure all IDs are unique and properly referenced
+            - Do not include XML declarations or DOCTYPE
             - No explanations or markdown`;
         }
 
@@ -54,7 +64,7 @@ export async function POST(request) {
         const svgContent = data.content[0].text;
 
         // Extract just the SVG code if there's any surrounding text
-        const svgMatch = svgContent.match(/<svg[\s\S]*<\/svg>/);
+        const svgMatch = svgContent.match(/<svg[\s\S]*?<\/svg>/);
         const cleanSvg = svgMatch ? svgMatch[0] : svgContent;
 
         return NextResponse.json({ svg: cleanSvg });
