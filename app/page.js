@@ -39,27 +39,27 @@ export default function Home() {
     }
   }, { enableOnFormTags: true });
 
-  useHotkeys('mod+r', (e) => {
-    e.preventDefault();
-    console.log('Clear and retry shortcut triggered via react-hotkeys-hook');
-    clearIcon();
+  // useHotkeys('mod+r', (e) => {
+  //   e.preventDefault();
+  //   console.log('Clear and retry shortcut triggered via react-hotkeys-hook');
+  //   clearIcon();
 
-    // Resubmit the last prompt if available
-    if (lastPrompt) {
-      // Set a small timeout to ensure the UI updates first
-      setTimeout(() => {
-        if (promptInputRef.current) {
-          promptInputRef.current.setPromptAndSubmit(lastPrompt);
-        }
-      }, 100);
-    } else {
-      // Just focus the input if no last prompt
-      const promptInput = document.querySelector('textarea');
-      if (promptInput) {
-        promptInput.focus();
-      }
-    }
-  }, { enableOnFormTags: true });
+  //   // Resubmit the last prompt if available
+  //   if (lastPrompt) {
+  //     // Set a small timeout to ensure the UI updates first
+  //     setTimeout(() => {
+  //       if (promptInputRef.current) {
+  //         promptInputRef.current.setPromptAndSubmit(lastPrompt);
+  //       }
+  //     }, 100);
+  //   } else {
+  //     // Just focus the input if no last prompt
+  //     const promptInput = document.querySelector('textarea');
+  //     if (promptInput) {
+  //       promptInput.focus();
+  //     }
+  //   }
+  // }, { enableOnFormTags: true });
 
   const generateIcon = async (prompt, currentSvg = null) => {
     if (!isKeyValid) {

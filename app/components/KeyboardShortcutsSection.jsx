@@ -6,7 +6,7 @@ export default function KeyboardShortcutsSection() {
         { key: "⌘ + Enter", action: "Submit" },
         { key: "⌘ + Backspace", action: "Clear icon" },
         { key: "⌘ + Shift + C", action: "Copy SVG code" },
-        { key: "⌘ + R", action: "Clear icon and retry" }
+        // { key: "⌘ + R", action: "Clear icon and retry" }
     ];
 
     return (
