@@ -9,6 +9,7 @@ import Button from './components/Button';
 import TipsSection from './components/TipsSection';
 import ExamplePromptsSection from './components/ExamplePromptsSection';
 import KeyboardShortcutsSection from './components/KeyboardShortcutsSection';
+import ApiKeyInput from './components/ApiKeyInput';
 import { PromptProvider } from './context/PromptContext';
 import { enhanceSvg } from './utils/svgUtils';
 
@@ -18,6 +19,8 @@ export default function Home() {
   const [error, setError] = useState('');
   const [promptHistory, setPromptHistory] = useState([]);
   const [lastPrompt, setLastPrompt] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  const [isKeyValid, setIsKeyValid] = useState(false);
   const svgRef = useRef(null);
   const promptInputRef = useRef(null);
 
@@ -58,6 +61,11 @@ export default function Home() {
   }, { enableOnFormTags: true });
 
   const generateIcon = async (prompt, currentSvg = null) => {
+    if (!isKeyValid) {
+      setError('Please enter a valid Anthropic API key first');
+      return;
+    }
+
     setIsLoading(true);
     setError('');
 
@@ -73,7 +81,8 @@ export default function Home() {
         },
         body: JSON.stringify({
           prompt,
-          currentSvg // Pass the current SVG if we're in edit mode
+          currentSvg, // Pass the current SVG if we're in edit mode
+          apiKey // Pass the user's API key
         }),
       });
 
@@ -159,13 +168,20 @@ export default function Home() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-4xl text-center mb-12"
+          className="w-full max-w-4xl text-center mb-6"
         >
           <h1 className="text-5xl font-bold text-gray-900 mb-3">Icon Generator</h1>
           <p className="text-gray-600 text-lg mx-auto max-w-md">
             Create SVG icons and art with Claude 3.7 Sonnet AI
           </p>
         </motion.div>
+
+        <ApiKeyInput
+          apiKey={apiKey}
+          setApiKey={setApiKey}
+          isKeyValid={isKeyValid}
+          setIsKeyValid={setIsKeyValid}
+        />
 
         <div className="w-full max-w-4xl flex flex-col md:flex-row gap-4 items-center md:items-start">
           <div className="w-full md:w-1/2 flex flex-col items-center gap-4">
@@ -208,6 +224,7 @@ export default function Home() {
               onSubmit={generateIcon}
               isLoading={isLoading}
               currentSvg={svg}
+              isKeyValid={isKeyValid}
             />
 
             <KeyboardShortcutsSection />

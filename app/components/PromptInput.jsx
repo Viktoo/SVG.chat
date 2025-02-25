@@ -1,7 +1,7 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { motion } from 'framer-motion';
 
-const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, currentSvg }, ref) {
+const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, currentSvg, isKeyValid }, ref) {
     const [prompt, setPrompt] = useState('');
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -64,14 +64,15 @@ const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, curre
                     placeholder={isEditMode
                         ? "Describe how to modify the current icon..."
                         : "Describe the icon you want to create..."}
-                    className="w-full p-4 pr-20 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none transition-all"
+                    className={`w-full p-4 pr-20 rounded-lg border ${!isKeyValid ? 'bg-gray-100' : 'bg-white'} border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none transition-all`}
                     rows={3}
+                    disabled={!isKeyValid}
                 />
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
-                    disabled={isLoading || !prompt.trim()}
+                    disabled={isLoading || !prompt.trim() || !isKeyValid}
                     className="absolute bottom-4 right-3 p-2 rounded-md bg-blue-600 text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700"
                 >
                     {isLoading ? (
@@ -89,6 +90,11 @@ const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, curre
             {isEditMode && (
                 <div className="mt-2 text-sm text-blue-600 font-medium">
                     Editing mode: Your prompt will modify the existing icon
+                </div>
+            )}
+            {!isKeyValid && (
+                <div className="mt-2 text-sm text-amber-600 font-medium">
+                    Please enter your Anthropic API key above to start generating icons
                 </div>
             )}
         </form>

@@ -2,7 +2,11 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
     try {
-        const { prompt, currentSvg } = await request.json();
+        const { prompt, currentSvg, apiKey } = await request.json();
+
+        if (!apiKey || !apiKey.startsWith('sk-')) {
+            return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
+        }
 
         // Construct the appropriate prompt based on whether we're editing or creating
         let userPrompt;
@@ -40,7 +44,7 @@ export async function POST(request) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.ANTHROPIC_API_KEY,
+                'x-api-key': apiKey,
                 'anthropic-version': '2023-06-01'
             },
             body: JSON.stringify({
@@ -57,7 +61,7 @@ export async function POST(request) {
 
         if (!response.ok) {
             const errorData = await response.json();
-            return NextResponse.json({ error: errorData }, { status: response.status });
+            return NextResponse.json({ error: errorData.error?.message || 'API request failed' }, { status: response.status });
         }
 
         const data = await response.json();
