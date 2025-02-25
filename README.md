@@ -4,6 +4,8 @@ SVG.chat allows you to create custom SVG icons and art using Claude 3.7 Sonnet A
 
 ![SVG.chat Screenshot](https://github.com/Viktoo/SVG.chat/raw/main/public/svg_chat_demo_screenshot.png)
 
+[Demo video](https://www.linkedin.com/posts/makarskyy_aitools-opensource-claude37-activity-7300056040581083136-sBPw)
+
 ## Features
 
 - **AI-Powered Icon Generation**: Create SVG icons by describing them in natural language
