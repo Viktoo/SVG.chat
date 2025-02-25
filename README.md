@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SVG.chat - AI-Powered SVG Icon Generator
+
+SVG.chat allows you to create custom SVG icons and art using Claude 3.7 Sonnet AI. Simply describe the icon you want, and the AI will generate it for you.
+
+![SVG.chat Screenshot](https://github.com/Viktoo/SVG.chat/raw/main/public/screenshot.png)
+
+## Features
+
+- **AI-Powered Icon Generation**: Create SVG icons by describing them in natural language
+- **Edit Mode**: Modify existing icons with additional prompts
+- **Export Options**: Copy SVG code or download as PNG
+- **Keyboard Shortcuts**: Streamlined workflow with convenient shortcuts
+- **Responsive Design**: Works on desktop and mobile devices
+- **Client-Side Processing**: Your API key never leaves your browser
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18.x or higher
+- An Anthropic API key (get one at [console.anthropic.com](https://console.anthropic.com))
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Viktoo/SVG.chat.git
+   cd SVG.chat
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Enter your Anthropic API key in the API key section
+2. Type a description of the icon you want to create in the prompt field
+3. Click the submit button or press Cmd/Ctrl+Enter
+4. Once generated, you can:
+   - Copy the SVG code with the "Copy SVG" button
+   - Download as PNG with the "Download PNG" button
+   - Clear the icon with the "Clear" button
+   - Modify the existing icon by entering a new prompt in edit mode
 
-## Deploy on Vercel
+### Example Prompts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- "A simple line art cat icon"
+- "An animated sunset"
+- "A #FFDE21 face"
+- "A #000000 to #FFFFFF gradient circle"
+- "A mountain with sun, blue and orange colors"
+- "A cyberpunk-style lock icon with glowing elements"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Keyboard Shortcuts
+
+- **⌘/Ctrl + Enter**: Submit prompt
+- **⌘/Ctrl + Backspace**: Clear icon
+- **⌘/Ctrl + Shift + C**: Copy SVG code
+- **⌘/Ctrl + R**: Clear icon and retry
+
+## How It Works
+
+SVG.chat uses the Anthropic Claude 3.7 Sonnet API to generate SVG icons based on your text descriptions. The application:
+
+1. Takes your text prompt and sends it to the Anthropic API
+2. Processes the response to extract clean SVG code
+3. Renders the SVG in the browser
+4. Provides tools to export or modify the generated icon
+
+Your API key is stored locally in your browser and is only used to authenticate requests to the Anthropic API.
+
+## Technologies Used
+
+- **Next.js**: React framework for the frontend and API routes
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Framer Motion**: Animation library for smooth UI transitions
+- **React Hotkeys Hook**: Keyboard shortcut management
+- **Anthropic Claude API**: AI model for generating SVG code
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Anthropic](https://www.anthropic.com/) for providing the Claude API
+- [Next.js](https://nextjs.org/) for the React framework
+- All contributors and users of this project
+
+---
+
+Built with ❤️ by [Vik](https://github.com/Viktoo)
