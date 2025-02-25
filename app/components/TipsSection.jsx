@@ -9,6 +9,7 @@ export default function TipsSection() {
         "If icon is empty, try again",
         "Ask to change theme or style",
         "Ask to remove things you don't like",
+        "Try adding 'icon' to prompt to ensure an icon"
     ];
 
     return (

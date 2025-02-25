@@ -16,7 +16,10 @@ export default function ExamplePromptsSection() {
 
     const handleExampleClick = (example) => {
         if (promptInputRef && promptInputRef.current) {
-            promptInputRef.current.setPrompt(example);
+            if (window && window.clearIconBeforeGeneration) {
+                window.clearIconBeforeGeneration();
+            }
+            promptInputRef.current.generateWithoutSettingPrompt(example);
         }
     };
 

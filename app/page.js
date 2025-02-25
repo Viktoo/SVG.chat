@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { motion } from 'framer-motion';
 import IconDisplay from './components/IconDisplay';
@@ -144,6 +144,14 @@ export default function Home() {
     img.src = url;
   };
 
+  useEffect(() => {
+    window.clearIconBeforeGeneration = clearIcon;
+
+    return () => {
+      delete window.clearIconBeforeGeneration;
+    };
+  }, []);
+
   return (
     <PromptProvider promptInputRef={promptInputRef}>
       <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
@@ -155,7 +163,7 @@ export default function Home() {
         >
           <h1 className="text-5xl font-bold text-gray-900 mb-3">Icon Generator</h1>
           <p className="text-gray-600 text-lg mx-auto max-w-md">
-            Create SVG icons with Claude 3.7 Sonnet AI
+            Create SVG icons and art with Claude 3.7 Sonnet AI
           </p>
         </motion.div>
 

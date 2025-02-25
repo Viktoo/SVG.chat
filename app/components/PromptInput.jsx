@@ -18,6 +18,12 @@ const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, curre
                     onSubmit(newPrompt, isEditMode ? currentSvg : null);
                 }
             }, 0);
+        },
+        // New method to generate without setting the prompt text
+        generateWithoutSettingPrompt: (promptText) => {
+            if (promptText.trim() && !isLoading) {
+                onSubmit(promptText, null); // Always pass null for currentSvg to ensure it's a new generation
+            }
         }
     }));
 
