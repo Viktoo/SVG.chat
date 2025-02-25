@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { motion } from 'framer-motion';
 import IconDisplay from './components/IconDisplay';
 import PromptInput from './components/PromptInput';
@@ -12,6 +13,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const svgRef = useRef(null);
+
+  useHotkeys('mod+backspace', (e) => {
+    e.preventDefault();
+    console.log('Clear shortcut triggered via react-hotkeys-hook');
+    clearIcon();
+  }, { enableOnFormTags: true });
 
   const generateIcon = async (prompt, currentSvg = null) => {
     setIsLoading(true);

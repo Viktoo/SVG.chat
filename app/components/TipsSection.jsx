@@ -5,14 +5,12 @@ export default function TipsSection() {
     const [isOpen, setIsOpen] = useState(false);
 
     const tips = [
-        "For colorful icons, specify colors in your prompt (e.g., 'blue rocket with red flames')",
-        "Request specific styles like 'minimalist', 'flat', 'outlined', or '3D'",
-        "Specify the viewing angle: 'front view', 'isometric', 'side view'",
+        "To change color, specify the color in your prompt (e.g., 'use #53A2EB')",
         "For complex icons, break down the elements you want to see",
-        "Mention if you want text included in the icon",
-        "Request specific themes like 'cyberpunk', 'retro', or 'futuristic'",
-        "When editing, be specific about what to change (e.g., 'make the background blue')",
-        "For edits, you can request to 'keep the same style but change the subject'"
+        "Request specific themes like 'simple', 'rounded', or 'cute'",
+        "Clear between each new icon request (Command+Backspace or Ctrl+Backspace)",
+        "Add max details in first icon request for best results",
+        "Clear and try again if you don't like the results"
     ];
 
     return (

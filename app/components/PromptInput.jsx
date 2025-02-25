@@ -14,6 +14,7 @@ export default function PromptInput({ onSubmit, isLoading, currentSvg }) {
         e.preventDefault();
         if (prompt.trim() && !isLoading) {
             onSubmit(prompt, isEditMode ? currentSvg : null);
+            setPrompt('');
         }
     };
 
@@ -24,13 +25,14 @@ export default function PromptInput({ onSubmit, isLoading, currentSvg }) {
             e.preventDefault();
             if (prompt.trim() && !isLoading) {
                 onSubmit(prompt, isEditMode ? currentSvg : null);
+                setPrompt('');
             }
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-md">
-            <div className="relative">
+            <div className="relative w-full">
                 <motion.textarea
                     whileFocus={{ scale: 1.01 }}
                     transition={{ type: 'spring', stiffness: 300 }}
@@ -48,7 +50,7 @@ export default function PromptInput({ onSubmit, isLoading, currentSvg }) {
                     whileTap={{ scale: 0.95 }}
                     type="submit"
                     disabled={isLoading || !prompt.trim()}
-                    className={`absolute right-2 bottom-2 p-2 rounded-md bg-blue-600 text-white ${isLoading || !prompt.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+                    className="absolute bottom-4 right-3 p-2 rounded-md bg-blue-600 text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700"
                 >
                     {isLoading ? (
                         <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
