@@ -39,6 +39,21 @@ export default function Home() {
     }
   }, { enableOnFormTags: true });
 
+  useHotkeys('mod+shift+v', (e) => {
+    e.preventDefault();
+    console.log('Paste last prompt shortcut triggered via react-hotkeys-hook');
+
+    if (lastPrompt && promptInputRef.current) {
+      promptInputRef.current.setPrompt(lastPrompt);
+
+      // Focus the textarea after setting the prompt
+      const promptInput = document.querySelector('textarea');
+      if (promptInput) {
+        promptInput.focus();
+      }
+    }
+  }, { enableOnFormTags: true });
+
   // useHotkeys('mod+r', (e) => {
   //   e.preventDefault();
   //   console.log('Clear and retry shortcut triggered via react-hotkeys-hook');

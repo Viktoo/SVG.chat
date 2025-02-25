@@ -5,6 +5,7 @@ export default function KeyboardShortcutsSection() {
     const shortcuts = [
         { key: "⌘ + Enter", action: "Submit" },
         { key: "⌘ + Backspace", action: "Clear icon" },
+        { key: "⌘ + Shift + V", action: "Paste last prompt" },
         { key: "⌘ + Shift + C", action: "Copy SVG code" },
         // { key: "⌘ + R", action: "Clear icon and retry" }
     ];
