@@ -1,6 +1,6 @@
 # SVG.chat - AI-Powered SVG Icon Generator
 
-SVG.chat allows you to create custom SVG icons and art using Claude 3.7 Sonnet AI. Simply describe the icon you want, and the AI will generate it for you.
+SVG.chat is a free and open source design tool allowing you to create custom SVG icons and art using Claude 3.7 Sonnet AI. Simply describe the icon you want, and AI will generate it for you.
 
 ![SVG.chat Screenshot](https://github.com/Viktoo/SVG.chat/raw/main/public/svg_chat_demo_screenshot.png)
 
