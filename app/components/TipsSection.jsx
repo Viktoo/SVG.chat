@@ -13,7 +13,7 @@ export default function TipsSection() {
     ];
 
     return (
-        <Dropdown title="Tips for better icons">
+        <Dropdown title="Usage Tips">
             <ul className="p-4 bg-gray-50 rounded-b-lg border-x border-b border-gray-200 space-y-2">
                 {tips.map((tip, index) => (
                     <motion.li

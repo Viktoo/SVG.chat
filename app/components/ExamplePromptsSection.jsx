@@ -7,6 +7,7 @@ export default function ExamplePromptsSection(isKeyValid) {
     const { promptInputRef } = useContext(PromptContext);
 
     const examples = [
+        "A simple line art cat icon",
         "An animated sunset",
         "A #FFDE21 face",
         "A #000000 to #FFFFFF gradient circle",
@@ -38,7 +39,7 @@ export default function ExamplePromptsSection(isKeyValid) {
 
     return (
         <Dropdown
-            title="Example prompts"
+            title="Example Prompts"
             bgColor="bg-gray-100"
             hoverBgColor="bg-gray-200"
             borderColor="border-gray-200"
