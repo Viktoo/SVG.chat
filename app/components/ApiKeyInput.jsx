@@ -7,6 +7,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
     const [isSaved, setIsSaved] = useState(false);
     const [isExpanded, setIsExpanded] = useState(!apiKey);
     const [inputValue, setInputValue] = useState(apiKey || '');
+    const [showError, setShowError] = useState(false);
 
     // Check if key exists in localStorage on component mount
     useEffect(() => {
@@ -27,6 +28,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
             setIsSaved(true);
             setIsKeyValid(true);
             setIsExpanded(false);
+            setShowError(false);
 
             // Show success message temporarily
             const el = document.createElement('div');
@@ -39,6 +41,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
             }, 2000);
         } else {
             setIsKeyValid(false);
+            setShowError(true);
         }
     };
 
@@ -50,6 +53,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
         setIsKeyValid(false);
         setIsExpanded(true);
         setIsVisible(false);
+        setShowError(false);
     };
 
     return (
@@ -114,7 +118,12 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
                             className="px-4 pb-4"
                         >
                             <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mb-4 text-sm text-blue-700">
-                                <p>You need an Anthropic API key to use this application. Get one at <a href="https://console.anthropic.com/" target="_blank" rel="noopener noreferrer" className="underline font-medium">console.anthropic.com</a></p>
+                                <ul className="list-disc pl-4 space-y-1">
+                                    <li>This is an open-source project that needs your own Anthropic API key to run.</li>
+                                    <li>Get an API key at <a href="https://console.anthropic.com/" target="_blank" rel="noopener noreferrer" className="underline font-medium">console.anthropic.com</a></li>
+                                    <li>Your API key never leaves your browser and is stored only on your device.</li>
+                                    <li>View the full source code at <a href="https://github.com/Viktoo/SVG.chat/" target="_blank" rel="noopener noreferrer" className="underline font-medium">github.com/Viktoo/SVG.chat</a></li>
+                                </ul>
                             </div>
 
                             <div className="relative">
@@ -123,10 +132,12 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
                                     value={inputValue}
                                     onChange={(e) => {
                                         setInputValue(e.target.value);
-                                        setIsKeyValid(true); // Reset validation on change
+                                        if (showError) {
+                                            setShowError(false);
+                                        }
                                     }}
                                     placeholder="sk-ant-api03-..."
-                                    className={`w-full p-3 pr-24 border ${!isKeyValid ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all`}
+                                    className={`w-full p-3 pr-24 border ${showError ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all`}
                                 />
                                 <button
                                     onClick={() => setIsVisible(!isVisible)}
@@ -147,7 +158,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
                                 </button>
                             </div>
 
-                            {!isKeyValid && (
+                            {showError && (
                                 <motion.p
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
