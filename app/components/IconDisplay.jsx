@@ -1,16 +1,27 @@
 import { motion } from 'framer-motion';
 
 export default function IconDisplay({ svg, isLoading }) {
-    // Add a function to inject width and height attributes if they don't exist
+    // Simpler function to ensure SVG renders properly
     const enhanceSvg = (svgString) => {
         if (!svgString) return '';
 
-        // If SVG doesn't have width/height attributes, add them
-        if (!svgString.includes('width=') || !svgString.includes('height=')) {
-            return svgString.replace('<svg', '<svg width="100%" height="100%"');
+        // Add width and height if they don't exist
+        let enhancedSvg = svgString;
+
+        if (!enhancedSvg.includes('width=')) {
+            enhancedSvg = enhancedSvg.replace('<svg', '<svg width="100%"');
         }
 
-        return svgString;
+        if (!enhancedSvg.includes('height=')) {
+            enhancedSvg = enhancedSvg.replace('<svg', '<svg height="100%"');
+        }
+
+        // Add preserveAspectRatio if it doesn't exist
+        if (!enhancedSvg.includes('preserveAspectRatio=')) {
+            enhancedSvg = enhancedSvg.replace('<svg', '<svg preserveAspectRatio="xMidYMid meet"');
+        }
+
+        return enhancedSvg;
     };
 
     return (

@@ -1,9 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { motion } from 'framer-motion';
 
-export default function PromptInput({ onSubmit, isLoading, currentSvg }) {
+const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, currentSvg }, ref) {
     const [prompt, setPrompt] = useState('');
     const [isEditMode, setIsEditMode] = useState(false);
+
+    // Expose methods to parent component
+    useImperativeHandle(ref, () => ({
+        setPrompt: (newPrompt) => {
+            setPrompt(newPrompt);
+        },
+        setPromptAndSubmit: (newPrompt) => {
+            setPrompt(newPrompt);
+            // Use setTimeout to ensure state is updated before submitting
+            setTimeout(() => {
+                if (newPrompt.trim() && !isLoading) {
+                    onSubmit(newPrompt, isEditMode ? currentSvg : null);
+                }
+            }, 0);
+        }
+    }));
 
     // Set edit mode when we have an existing SVG
     useEffect(() => {
@@ -71,4 +87,6 @@ export default function PromptInput({ onSubmit, isLoading, currentSvg }) {
             )}
         </form>
     );
-} 
+});
+
+export default PromptInput; 

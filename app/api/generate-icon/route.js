@@ -16,24 +16,14 @@ export async function POST(request) {
             
             Please modify this SVG according to my description. 
             
-            Important requirements:
-            - Respond ONLY with valid SVG code
-            - No explanations or markdown
-            - The SVG should be simple, clean, and suitable as an icon
-            - Maintain the same viewBox if possible
-            - Include appropriate colors
-            - The SVG should be self-contained with all styling inline`;
+            - Respond ONLY with valid SVG code self-contained with all styling inline
+            - No explanations or markdown`;
         } else {
             // We're creating a new icon
             userPrompt = `Create an SVG icon based on this description: "${prompt}". 
             
-            Important requirements:
-            - Respond ONLY with valid SVG code
-            - No explanations or markdown
-            - The SVG should be simple, clean, and suitable as an icon
-            - Use a viewBox that makes sense for the icon
-            - Only change colors if explicity requested
-            - The SVG should be self-contained with all styling inline`;
+            - Respond ONLY with valid SVG code self-contained with all styling inline
+            - No explanations or markdown`;
         }
 
         const response = await fetch('https://api.anthropic.com/v1/messages', {

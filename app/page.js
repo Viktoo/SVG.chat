@@ -7,12 +7,18 @@ import IconDisplay from './components/IconDisplay';
 import PromptInput from './components/PromptInput';
 import Button from './components/Button';
 import TipsSection from './components/TipsSection';
+import ExamplePromptsSection from './components/ExamplePromptsSection';
+import KeyboardShortcutsSection from './components/KeyboardShortcutsSection';
+import { PromptProvider } from './context/PromptContext';
 
 export default function Home() {
   const [svg, setSvg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [promptHistory, setPromptHistory] = useState([]);
+  const [lastPrompt, setLastPrompt] = useState('');
   const svgRef = useRef(null);
+  const promptInputRef = useRef(null);
 
   useHotkeys('mod+backspace', (e) => {
     e.preventDefault();
@@ -20,9 +26,43 @@ export default function Home() {
     clearIcon();
   }, { enableOnFormTags: true });
 
+  useHotkeys('mod+shift+c', (e) => {
+    if (svg) {
+      e.preventDefault();
+      console.log('Copy SVG shortcut triggered via react-hotkeys-hook');
+      copySvgCode();
+    }
+  }, { enableOnFormTags: true });
+
+  useHotkeys('mod+r', (e) => {
+    e.preventDefault();
+    console.log('Clear and retry shortcut triggered via react-hotkeys-hook');
+    clearIcon();
+
+    // Resubmit the last prompt if available
+    if (lastPrompt) {
+      // Set a small timeout to ensure the UI updates first
+      setTimeout(() => {
+        if (promptInputRef.current) {
+          promptInputRef.current.setPromptAndSubmit(lastPrompt);
+        }
+      }, 100);
+    } else {
+      // Just focus the input if no last prompt
+      const promptInput = document.querySelector('textarea');
+      if (promptInput) {
+        promptInput.focus();
+      }
+    }
+  }, { enableOnFormTags: true });
+
   const generateIcon = async (prompt, currentSvg = null) => {
     setIsLoading(true);
     setError('');
+
+    // Save the prompt to history and as the last prompt
+    setLastPrompt(prompt);
+    setPromptHistory(prev => [...prev, prompt]);
 
     try {
       const response = await fetch('/api/generate-icon', {
@@ -103,77 +143,69 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12 text-center"
-      >
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Icon Generator</h1>
-        <p className="text-gray-600 max-w-md">Create beautiful SVG icons with Claude 3.7 Sonnet AI</p>
-      </motion.div>
+    <PromptProvider promptInputRef={promptInputRef}>
+      <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-4xl text-center mb-12"
+        >
+          <h1 className="text-5xl font-bold text-gray-900 mb-3">Icon Generator</h1>
+          <p className="text-gray-600 text-lg mx-auto max-w-md">
+            Create SVG icons with Claude 3.7 Sonnet AI
+          </p>
+        </motion.div>
 
-      <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8 items-center md:items-start">
-        <div className="w-full md:w-1/2 flex flex-col items-center gap-6">
-          <div ref={svgRef}>
-            <IconDisplay svg={svg} isLoading={isLoading} />
+        <div className="w-full max-w-4xl flex flex-col md:flex-row gap-4 items-center md:items-start">
+          <div className="w-full md:w-1/2 flex flex-col items-center gap-4">
+            <div ref={svgRef}>
+              <IconDisplay svg={svg} isLoading={isLoading} />
+            </div>
+
+            {svg && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex gap-3"
+              >
+                <Button onClick={copySvgCode} variant="secondary">
+                  Copy SVG
+                </Button>
+                <Button onClick={downloadPng} variant="secondary">
+                  Download PNG
+                </Button>
+                <Button onClick={clearIcon} variant="danger">
+                  Clear
+                </Button>
+              </motion.div>
+            )}
+
+            {error && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-500 text-center"
+              >
+                {error}
+              </motion.div>
+            )}
           </div>
 
-          {svg && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex gap-3"
-            >
-              <Button onClick={copySvgCode} variant="secondary">
-                Copy SVG
-              </Button>
-              <Button onClick={downloadPng} variant="secondary">
-                Download PNG
-              </Button>
-              <Button onClick={clearIcon} variant="danger">
-                Clear
-              </Button>
-            </motion.div>
-          )}
+          <div className="w-full md:w-1/2 flex flex-col gap-4">
+            <PromptInput
+              ref={promptInputRef}
+              onSubmit={generateIcon}
+              isLoading={isLoading}
+              currentSvg={svg}
+            />
 
-          {error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-red-500 text-center"
-            >
-              {error}
-            </motion.div>
-          )}
-        </div>
-
-        <div className="w-full md:w-1/2 flex flex-col gap-6">
-          <PromptInput
-            onSubmit={generateIcon}
-            isLoading={isLoading}
-            currentSvg={svg}
-          />
-
-          <TipsSection />
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="bg-blue-50 border border-blue-200 rounded-lg p-4"
-          >
-            <h3 className="font-medium text-blue-800 mb-2">Example prompts:</h3>
-            <ul className="space-y-2 text-blue-700">
-              <li>• "A minimalist rocket icon with flame, outlined style"</li>
-              <li>• "A colorful gradient chat bubble with a smile inside"</li>
-              <li>• "A flat design mountain with sun, blue and orange colors"</li>
-              <li>• "A cyberpunk-style lock icon with glowing elements"</li>
-            </ul>
-          </motion.div>
+            <KeyboardShortcutsSection />
+            <TipsSection />
+            <ExamplePromptsSection />
+          </div>
         </div>
       </div>
-    </div>
+    </PromptProvider>
   );
 }
