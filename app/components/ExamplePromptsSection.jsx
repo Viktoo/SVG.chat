@@ -7,12 +7,12 @@ export default function ExamplePromptsSection(isKeyValid) {
     const { promptInputRef } = useContext(PromptContext);
 
     const examples = [
-        "A simple line art cat icon",
-        "An animated sunset",
-        "A happy face",
-        "A #000000 to #FFFFFF gradient circle",
-        "A mountain with sun, blue and orange colors",
-        "A cyberpunk-style lock icon with glowing elements"
+        "Simple line art cat icon",
+        "Animated sunset",
+        "Happy face",
+        "Calendar icon with the date 18",
+        "Mountain with sun and clouds",
+        "Trophy award with a star and text 'Best in Show'",
     ];
 
     const handleExampleClick = (example) => {
