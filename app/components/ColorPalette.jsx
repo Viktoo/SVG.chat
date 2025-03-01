@@ -50,6 +50,8 @@ export default function ColorPalette({ onColorsChange }) {
 
         if (isValidHex && !colors.includes(currentColor)) {
             setColors([...colors, currentColor]);
+
+            setHexInput('');
         }
     };
 
@@ -123,7 +125,7 @@ export default function ColorPalette({ onColorsChange }) {
                         </svg>
                     </div>
                 ) : (
-                    <div className="w-5 h-5 rounded-full bg-gray-600"></div>
+                    <div className="w-5 h-5 rounded-full bg-gray-200"></div>
                 )}
             </motion.button>
 
@@ -135,58 +137,69 @@ export default function ColorPalette({ onColorsChange }) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-0 top-12 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-10"
+                        className="absolute right-0 top-12 w-52 bg-white rounded-lg shadow-lg border border-gray-200 p-3 z-10"
                     >
-                        <h3 className="font-medium text-gray-800 mb-3">Color Palette</h3>
+                        <h3 className="font-medium text-gray-800 mb-2">Color Palette</h3>
 
-                        <div className="mb-4">
-                            <div className="flex gap-2 mb-2">
+                        <div className="mb-3">
+                            <div className="flex gap-1.5 items-center">
                                 <input
                                     type="color"
                                     value={currentColor}
                                     onChange={handleColorPickerChange}
-                                    className="w-10 h-10 rounded cursor-pointer"
+                                    className="w-6 h-8 rounded cursor-pointer overflow-hidden appearance-none flex-shrink-0"
+                                    style={{
+                                        padding: 0,
+                                        border: 'none'
+                                    }}
                                 />
-                                <input
-                                    type="text"
-                                    value={hexInput}
-                                    onChange={handleHexChange}
-                                    placeholder="#RRGGBB"
-                                    className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                                />
+                                <div className="flex items-center gap-2 w-full">
+                                    <input
+                                        type="text"
+                                        value={hexInput}
+                                        onChange={handleHexChange}
+                                        placeholder="#RRGGBB"
+                                        className="w-full min-w-0 p-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-blue-300"
+                                    />
+                                    <motion.button
+                                        whileHover={{ scale: 1.05, backgroundColor: '#2563EB' }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={addColor}
+                                        className="h-[34px] w-[34px] flex-shrink-0 bg-blue-600 text-white rounded-md flex items-center justify-center transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                        </svg>
+                                    </motion.button>
+                                </div>
                             </div>
-                            <button
-                                onClick={addColor}
-                                className="w-full py-1.5 px-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
-                            >
-                                Add Color
-                            </button>
                         </div>
 
+                        <div className="h-px bg-gray-200 my-3"></div>
+
                         {colors.length > 0 && (
-                            <div>
-                                <div className="text-sm text-gray-600 mb-2">Selected Colors:</div>
-                                <div className="grid grid-cols-4 gap-2">
-                                    {colors.map(color => (
-                                        <div key={color} className="relative group">
-                                            <div
-                                                className="w-full aspect-square rounded-md border border-gray-200"
-                                                style={{ backgroundColor: color }}
-                                            />
-                                            <button
-                                                onClick={() => removeColor(color)}
-                                                className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 shadow-sm border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                </svg>
-                                            </button>
-                                            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-                                                {color}
-                                            </div>
+                            <div className="grid grid-cols-4 gap-1.5">
+                                {colors.map(color => (
+                                    <div key={color} className="relative group">
+                                        <div
+                                            className="w-full aspect-square rounded-md border border-gray-200"
+                                            style={{ backgroundColor: color }}
+                                        />
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            onClick={() => removeColor(color)}
+                                            className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 shadow-sm border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </motion.button>
+                                        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
+                                            {color}
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
                             </div>
                         )}
 
