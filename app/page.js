@@ -158,7 +158,7 @@ export default function Home() {
   return (
     <PromptProvider promptInputRef={promptInputRef}>
       <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -170,7 +170,7 @@ export default function Home() {
               Site maintenance in progress. Some features may be temporarily limited.
             </p>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: -20 }}
