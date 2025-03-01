@@ -81,6 +81,7 @@ export default function ColorPalette({ onColorsChange }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
+                type="button"
                 className="p-2 rounded-md bg-white border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-50"
                 aria-label="Color palette"
             >

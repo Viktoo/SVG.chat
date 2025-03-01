@@ -43,7 +43,7 @@ const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, curre
 
         if (!hasColorMentioned) {
             const colorList = selectedColors.join(', ');
-            return `${promptText} Use these colors: ${colorList}`;
+            return `${promptText} Use exactly these colors: ${colorList}`;
         }
 
         return promptText;
