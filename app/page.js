@@ -178,29 +178,28 @@ export default function Home() {
   }, []);
 
   // Fetch GitHub repository stats
-  useEffect(() => {
-    const fetchRepoStats = async () => {
-      try {
-        const response = await fetch('https://api.github.com/repos/Viktoo/SVG.chat');
-        if (response.ok) {
-          const data = await response.json();
-          setRepoStats({
-            stars: data.stargazers_count
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching repo stats:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRepoStats = async () => {
+  //     try {
+  //       const response = await fetch('https://api.github.com/repos/Viktoo/SVG.chat');
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setRepoStats({
+  //           stars: data.stargazers_count
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching repo stats:', error);
+  //     }
+  //   };
 
-    fetchRepoStats();
-  }, []);
+  //   fetchRepoStats();
+  // }, []);
 
   return (
     <PromptProvider promptInputRef={promptInputRef}>
       <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-        {/* GitHub Repository Widget */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -223,7 +222,7 @@ export default function Home() {
               <span className="text-gray-700 text-xs">{repoStats.stars}</span>
             </div>
           </a>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -272,9 +271,27 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-red-500 text-center"
+                className="flex flex-col items-center gap-3"
               >
-                {error}
+                <div className="text-red-500 text-center">
+                  {error}
+                </div>
+                <Button
+                  onClick={() => {
+                    if (lastPrompt) {
+                      generateIcon(lastPrompt);
+                    }
+                  }}
+                  variant="primary"
+                  className="w-full"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                    </svg>
+                    Retry with same prompt
+                  </div>
+                </Button>
               </motion.div>
             )}
           </div>

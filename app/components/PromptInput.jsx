@@ -64,7 +64,7 @@ const PromptInput = forwardRef(function PromptInput({ onSubmit, isLoading, curre
                     placeholder={isEditMode
                         ? "Describe how to modify the current icon..."
                         : "Describe the icon you want to create..."}
-                    className={`w-full p-4 pr-20 rounded-lg border ${!isKeyValid ? 'bg-gray-100' : 'bg-white'} border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none transition-all`}
+                    className={`w-full p-4 pr-20 rounded-lg border ${!isKeyValid ? 'bg-gray-100' : 'bg-white'} border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none transition-all text-gray-900`}
                     rows={3}
                     disabled={!isKeyValid}
                 />

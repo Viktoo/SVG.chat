@@ -137,7 +137,7 @@ export default function ApiKeyInput({ apiKey, setApiKey, isKeyValid, setIsKeyVal
                                         }
                                     }}
                                     placeholder="sk-ant-api03-..."
-                                    className={`w-full p-3 pr-24 border ${showError ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all`}
+                                    className={`w-full p-3 pr-24 border ${showError ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all text-gray-900`}
                                 />
                                 <button
                                     onClick={() => setIsVisible(!isVisible)}
