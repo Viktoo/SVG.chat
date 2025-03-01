@@ -12,6 +12,8 @@ export default function TipsSection() {
         "Keep trying if you don't like the first result",
         "Ask to change theme or style",
         "Ask to remove specific things you don't like",
+        "Using keyboard shortcuts is highly recommended",
+        "Paste SVG into Figma for fine-tune edits",
     ];
 
     return (

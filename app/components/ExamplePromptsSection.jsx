@@ -9,7 +9,7 @@ export default function ExamplePromptsSection(isKeyValid) {
     const examples = [
         "A simple line art cat icon",
         "An animated sunset",
-        "A #FFDE21 face",
+        "A happy face",
         "A #000000 to #FFFFFF gradient circle",
         "A mountain with sun, blue and orange colors",
         "A cyberpunk-style lock icon with glowing elements"
