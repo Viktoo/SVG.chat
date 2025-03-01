@@ -3,8 +3,8 @@ import Dropdown from './Dropdown';
 
 export default function TipsSection() {
     const tips = [
+        "By default, the icon will be colorful, ask for a 'line art icon' to simplify",
         "Clear between new icon requests",
-        "Asking for a 'line art icon' works well",
         "Ask for thinner or thicker lines",
         "Specify hex colors in your prompt",
         "If you get an error, click retry",
