@@ -88,8 +88,8 @@ export default function Home() {
 
       setSvg(data.svg);
     } catch (err) {
-      setError(err.message);
-      console.error('Error generating icon:', err);
+      setError('Your request may have been too complex. Try retrying, or start simpler and build up.');
+      console.error('Original error:', err.message);
     } finally {
       setIsLoading(false);
     }
