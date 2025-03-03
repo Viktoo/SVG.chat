@@ -27,7 +27,7 @@ export default function TipsSection() {
                         className="flex items-start"
                     >
                         <span className="text-blue-500 mr-2">•</span>
-                        <span>{tip}</span>
+                        <span className='text-gray-700'>{tip}</span>
                     </motion.li>
                 ))}
             </ul>

@@ -28,7 +28,7 @@ export default function KeyboardShortcutsSection() {
                         className="flex items-center justify-between"
                     >
                         <span className="text-gray-700">{shortcut.action}</span>
-                        <kbd className="px-2 py-1 bg-gray-100 border border-gray-300 rounded-md text-sm font-mono shadow-sm">
+                        <kbd className="text-gray-700 px-2 py-1 bg-gray-100 border border-gray-300 rounded-md text-sm font-mono shadow-sm">
                             {shortcut.key}
                         </kbd>
                     </motion.li>

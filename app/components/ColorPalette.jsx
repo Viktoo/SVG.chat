@@ -160,17 +160,18 @@ export default function ColorPalette({ onColorsChange }) {
                                         value={hexInput}
                                         onChange={handleHexChange}
                                         placeholder="#RRGGBB"
-                                        className="w-full min-w-0 p-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-blue-300"
+                                        className="text-gray-700 w-full min-w-0 p-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-blue-300"
                                     />
                                     <motion.button
                                         whileHover={{ scale: 1.05, backgroundColor: '#2563EB' }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={addColor}
-                                        className="h-[34px] w-[34px] flex-shrink-0 bg-blue-600 text-white rounded-md flex items-center justify-center transition-colors"
+                                        className="h-[34px] flex-shrink-0 bg-blue-600 text-white rounded-md flex items-center justify-center transition-colors px-2"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                                         </svg>
+                                        <span className="text-xs">Add</span>
                                     </motion.button>
                                 </div>
                             </div>
